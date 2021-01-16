@@ -15,6 +15,7 @@ export const insert = createAction(INSERT, text => ({
     text,
     done: false
 }))
+//파라미터 그냥 id만 넣어줘도 됨. 위에 insert와 구조를 맞추기 위해 함수 형태로 넣어준 것
 export const toggle = createAction(TOGGLE, id =>id);
 export const remove = createAction(REMOVE, id =>id);
 
@@ -36,8 +37,9 @@ const initialState = {
 
 const todos = handleActions(
     {
-    
         [CHANGE_INPUT] : (state, {payload : input}) => (
+            //produce는 immer에서 제공하는 함수로, 객체가 깊은 경우 
+            //불변성을 지키면서 state를 업데이트할 때 유용
             produce(state, draft => {
                 draft.input = input;
             })
